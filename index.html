@@ -123,6 +123,7 @@
       width: min(380px, 90vw);
       margin: 0 auto;
       display: block;
+      border-radius: 18px;
     }
 
     @keyframes pop {
@@ -179,7 +180,7 @@
             fill="#ff7aa2"/>
     </svg>
 
-    <!-- UPDATED NAME -->
+    <!-- UPDATED TEXT -->
     <h1>Sameen, will you be my Valentine?</h1>
 
     <section class="button-zone" id="zone">
@@ -191,10 +192,12 @@
 
     <section class="result" id="result">
       <h2>YAY! 🎉</h2>
+
+      <!-- UPDATED IMAGE -->
       <img
         class="fireworks"
-        src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
-        alt="Fireworks"
+        src="yes.jpeg"
+        alt="Celebration"
       />
     </section>
   </main>
@@ -274,7 +277,7 @@
 
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
-      // START MUSIC SAFELY
+      // START MUSIC
       document.getElementById("bgMusic").play();
 
       zone.style.display = "none";
