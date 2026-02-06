@@ -30,7 +30,6 @@
       padding: 16px;
     }
 
-    /* FULL-SCREEN CONFETTI CANVAS */
     #confettiCanvas {
       position: fixed;
       inset: 0;
@@ -108,7 +107,6 @@
       opacity: .7;
     }
 
-    /* RESULT SECTION */
     .result {
       display: none;
       margin-top: 18px;
@@ -120,7 +118,6 @@
       margin: 10px 0;
     }
 
-    /* SMOOTH IMAGE FADE-IN */
     .result img {
       opacity: 0;
       transform: scale(0.95);
@@ -135,11 +132,6 @@
       opacity: 1;
       transform: scale(1);
     }
-
-    @keyframes pop {
-      from { transform: scale(.96); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
   </style>
 </head>
 
@@ -153,84 +145,68 @@
 
   <main class="card">
 
-    <!-- CUSTOM CARTOON DEER HOLDING HEART -->
-    <svg class="art" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" aria-label="Cartoon deer holding a heart" role="img">
+    <!-- SHY CUTE DEER + HEART BESIDE -->
+    <svg class="art" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+
       <defs>
-        <linearGradient id="deerFur" x1="0" x2="1">
-          <stop offset="0" stop-color="#f2c29b"/>
-          <stop offset="1" stop-color="#d99a6a"/>
+        <linearGradient id="fur" x1="0" x2="1">
+          <stop offset="0" stop-color="#f7d1b0"/>
+          <stop offset="1" stop-color="#e3a678"/>
         </linearGradient>
 
-        <linearGradient id="deerMuzzle" x1="0" x2="1">
-          <stop offset="0" stop-color="#ffe1c9"/>
-          <stop offset="1" stop-color="#ffd2b0"/>
-        </linearGradient>
-
-        <linearGradient id="deerHeart" x1="0" x2="1">
+        <linearGradient id="heart" x1="0" x2="1">
           <stop offset="0" stop-color="#ff4d7d"/>
           <stop offset="1" stop-color="#ff1f68"/>
         </linearGradient>
-
-        <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000" flood-opacity=".18"/>
-        </filter>
       </defs>
 
-      <!-- Antlers -->
-      <g fill="none" stroke="#8b5a3c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M122 58 C108 45, 104 30, 112 22"/>
-        <path d="M122 58 C112 56, 103 50, 98 40"/>
-        <path d="M122 58 C115 66, 108 70, 98 72"/>
+      <!-- Deer Head -->
+      <path d="M160 55
+               C120 55, 92 90, 92 132
+               C92 175, 122 205, 160 205
+               C198 205, 228 175, 228 132
+               C228 90, 200 55, 160 55Z"
+            fill="url(#fur)"/>
 
-        <path d="M198 58 C212 45, 216 30, 208 22"/>
-        <path d="M198 58 C208 56, 217 50, 222 40"/>
-        <path d="M198 58 C205 66, 212 70, 222 72"/>
-      </g>
+      <!-- Muzzle -->
+      <path d="M160 135
+               C135 135, 120 150, 120 168
+               C120 190, 140 200, 160 200
+               C180 200, 200 190, 200 168
+               C200 150, 185 135, 160 135Z"
+            fill="#ffe4cf"/>
 
-      <!-- Head -->
-      <g filter="url(#softShadow)">
-        <path d="M160 60
-                 C118 60, 90 92, 90 134
-                 C90 178, 122 206, 160 206
-                 C198 206, 230 178, 230 134
-                 C230 92, 202 60, 160 60Z"
-              fill="url(#deerFur)"/>
+      <!-- Big Shy Eyes -->
+      <circle cx="140" cy="125" r="10" fill="#111827"/>
+      <circle cx="180" cy="125" r="10" fill="#111827"/>
+      <circle cx="136" cy="121" r="3" fill="#fff"/>
+      <circle cx="176" cy="121" r="3" fill="#fff"/>
 
-        <!-- Muzzle -->
-        <path d="M160 128
-                 C134 128, 118 146, 118 164
-                 C118 186, 138 198, 160 198
-                 C182 198, 202 186, 202 164
-                 C202 146, 186 128, 160 128Z"
-              fill="url(#deerMuzzle)"/>
+      <!-- Blush Cheeks -->
+      <circle cx="125" cy="160" r="10" fill="#ff8fb0" opacity="0.6"/>
+      <circle cx="195" cy="160" r="10" fill="#ff8fb0" opacity="0.6"/>
 
-        <!-- Eyes -->
-        <circle cx="135" cy="126" r="7"/>
-        <circle cx="185" cy="126" r="7"/>
+      <!-- Tiny Nose -->
+      <circle cx="160" cy="170" r="6" fill="#6b3f2a"/>
 
-        <!-- Nose -->
-        <path d="M160 156
-                 C152 156, 147 162, 147 168
-                 C147 176, 154 182, 160 182
-                 C166 182, 173 176, 173 168
-                 C173 162, 168 156, 160 156Z"
-              fill="#6b3f2a"/>
+      <!-- Shy Smile -->
+      <path d="M150 180 C155 188, 165 188, 170 180"
+            fill="none" stroke="#6b3f2a" stroke-width="4" stroke-linecap="round"/>
 
-        <!-- Smile -->
-        <path d="M144 178 C150 188, 170 188, 176 178"
-              fill="none" stroke="#6b3f2a" stroke-width="5" stroke-linecap="round"/>
-      </g>
+      <!-- Heart moved to the side -->
+      <path d="M255 120
+               C245 108, 225 110, 225 128
+               C225 145, 242 155, 255 165
+               C268 155, 285 145, 285 128
+               C285 110, 265 108, 255 120Z"
+            fill="url(#heart)"/>
 
-      <!-- Heart -->
-      <path d="M160 188
-               C148 174, 126 176, 126 196
-               C126 212, 142 223, 160 234
-               C178 223, 194 212, 194 196
-               C194 176, 172 174, 160 188Z"
-            fill="url(#deerHeart)"/>
+      <!-- Small sparkle -->
+      <circle cx="270" cy="95" r="4" fill="#ff4d7d" opacity="0.8"/>
+      <circle cx="245" cy="90" r="3" fill="#ff4d7d" opacity="0.6"/>
+
     </svg>
 
-    <!-- UPDATED TEXT -->
     <h1>Sameen, will you be my Valentine?</h1>
 
     <section class="button-zone" id="zone">
@@ -240,7 +216,6 @@
 
     <div class="hint" id="hint">“No” seems a bit shy 😈</div>
 
-    <!-- RESULT -->
     <section class="result" id="result">
       <h2>YAY! 🎉</h2>
       <img src="yes.jpeg" alt="Celebration" />
@@ -254,7 +229,6 @@
     const result = document.getElementById("result");
     const hint = document.getElementById("hint");
 
-    /* ---------- CONFETTI ---------- */
     const confettiCanvas = document.getElementById("confettiCanvas");
 
     function resizeConfettiCanvas() {
@@ -287,14 +261,12 @@
       })();
     }
 
-    /* ---------- YES BUTTON GROWS ---------- */
     let yesScale = 1;
     function growYes() {
       yesScale = Math.min(2.2, yesScale + 0.1);
       yesBtn.style.transform = `translateY(-50%) scale(${yesScale})`;
     }
 
-    /* ---------- NO BUTTON TELEPORTS ---------- */
     function moveNo() {
       const z = zone.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
@@ -320,7 +292,6 @@
 
     noBtn.addEventListener("click", e => e.preventDefault());
 
-    /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
       // MUSIC FADE-IN
       const music = document.getElementById("bgMusic");
@@ -334,7 +305,7 @@
         if (vol >= 1) clearInterval(fade);
       }, 100);
 
-      // SHOW RESULT + FADE IMAGE
+      // SHOW RESULT
       zone.style.display = "none";
       hint.style.display = "none";
       result.style.display = "block";
@@ -343,7 +314,6 @@
         result.classList.add("show");
       }, 50);
 
-      // CONFETTI
       resizeConfettiCanvas();
       fullScreenConfetti();
     });
