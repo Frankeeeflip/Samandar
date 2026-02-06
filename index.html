@@ -108,6 +108,7 @@
       opacity: .7;
     }
 
+    /* RESULT SECTION */
     .result {
       display: none;
       margin-top: 18px;
@@ -119,11 +120,20 @@
       margin: 10px 0;
     }
 
-    .fireworks {
+    /* SMOOTH IMAGE FADE-IN */
+    .result img {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.8s ease, transform 0.8s ease;
       width: min(380px, 90vw);
+      border-radius: 18px;
       margin: 0 auto;
       display: block;
-      border-radius: 18px;
+    }
+
+    .result.show img {
+      opacity: 1;
+      transform: scale(1);
     }
 
     @keyframes pop {
@@ -167,9 +177,6 @@
                C140 210 90 180 90 120Z"
             fill="url(#fur)"/>
 
-      <path d="M110 92 L95 55 L140 78 Z" fill="#f2a97b"/>
-      <path d="M270 92 L285 55 L240 78 Z" fill="#f2a97b"/>
-
       <circle cx="160" cy="130" r="8"/>
       <circle cx="220" cy="130" r="8"/>
 
@@ -190,15 +197,12 @@
 
     <div class="hint" id="hint">“No” seems a bit shy 😈</div>
 
+    <!-- RESULT -->
     <section class="result" id="result">
       <h2>YAY! 🎉</h2>
 
       <!-- UPDATED IMAGE -->
-      <img
-        class="fireworks"
-        src="yes.jpeg"
-        alt="Celebration"
-      />
+      <img src="yes.jpeg" alt="Celebration" />
     </section>
   </main>
 
@@ -277,13 +281,28 @@
 
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
-      // START MUSIC
-      document.getElementById("bgMusic").play();
+      // MUSIC FADE-IN
+      const music = document.getElementById("bgMusic");
+      music.volume = 0;
+      music.play();
 
+      let vol = 0;
+      const fade = setInterval(() => {
+        vol += 0.05;
+        music.volume = Math.min(vol, 1);
+        if (vol >= 1) clearInterval(fade);
+      }, 100);
+
+      // SHOW RESULT + FADE IMAGE
       zone.style.display = "none";
       hint.style.display = "none";
       result.style.display = "block";
 
+      setTimeout(() => {
+        result.classList.add("show");
+      }, 50);
+
+      // CONFETTI
       resizeConfettiCanvas();
       fullScreenConfetti();
     });
