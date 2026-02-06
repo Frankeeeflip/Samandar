@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Will you be my Valentine?</title>
 
-  <!-- Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -81,7 +80,6 @@
       cursor: pointer;
       box-shadow: 0 10px 24px rgba(0,0,0,.14);
       user-select: none;
-      -webkit-tap-highlight-color: transparent;
       transition: transform .12s ease, background .12s ease;
     }
 
@@ -113,11 +111,6 @@
       animation: pop .35s ease;
     }
 
-    .result h2 {
-      font-size: clamp(30px, 4.5vw, 46px);
-      margin: 10px 0;
-    }
-
     .result img {
       opacity: 0;
       transform: scale(0.95);
@@ -136,7 +129,6 @@
 </head>
 
 <body>
-  <!-- BACKGROUND MUSIC -->
   <audio id="bgMusic" preload="auto" loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
@@ -145,9 +137,8 @@
 
   <main class="card">
 
-    <!-- SHY CUTE DEER + HEART BESIDE -->
+    <!-- SHY DEER WITH ANTLERS + HEART BESIDE -->
     <svg class="art" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-
       <defs>
         <linearGradient id="fur" x1="0" x2="1">
           <stop offset="0" stop-color="#f7d1b0"/>
@@ -159,6 +150,17 @@
           <stop offset="1" stop-color="#ff1f68"/>
         </linearGradient>
       </defs>
+
+      <!-- Soft Cute Antlers -->
+      <g fill="none" stroke="#8b5a3c" stroke-width="7" stroke-linecap="round">
+        <path d="M135 70 C120 50, 118 35, 125 25"/>
+        <path d="M135 70 C125 68, 115 60, 110 50"/>
+        <path d="M135 70 C128 78, 120 82, 110 84"/>
+
+        <path d="M185 70 C200 50, 202 35, 195 25"/>
+        <path d="M185 70 C195 68, 205 60, 210 50"/>
+        <path d="M185 70 C192 78, 200 82, 210 84"/>
+      </g>
 
       <!-- Deer Head -->
       <path d="M160 55
@@ -182,29 +184,24 @@
       <circle cx="136" cy="121" r="3" fill="#fff"/>
       <circle cx="176" cy="121" r="3" fill="#fff"/>
 
-      <!-- Blush Cheeks -->
+      <!-- Blush -->
       <circle cx="125" cy="160" r="10" fill="#ff8fb0" opacity="0.6"/>
       <circle cx="195" cy="160" r="10" fill="#ff8fb0" opacity="0.6"/>
 
-      <!-- Tiny Nose -->
+      <!-- Nose -->
       <circle cx="160" cy="170" r="6" fill="#6b3f2a"/>
 
-      <!-- Shy Smile -->
+      <!-- Smile -->
       <path d="M150 180 C155 188, 165 188, 170 180"
             fill="none" stroke="#6b3f2a" stroke-width="4" stroke-linecap="round"/>
 
-      <!-- Heart moved to the side -->
+      <!-- Heart beside deer -->
       <path d="M255 120
                C245 108, 225 110, 225 128
                C225 145, 242 155, 255 165
                C268 155, 285 145, 285 128
                C285 110, 265 108, 255 120Z"
             fill="url(#heart)"/>
-
-      <!-- Small sparkle -->
-      <circle cx="270" cy="95" r="4" fill="#ff4d7d" opacity="0.8"/>
-      <circle cx="245" cy="90" r="3" fill="#ff4d7d" opacity="0.6"/>
-
     </svg>
 
     <h1>Sameen, will you be my Valentine?</h1>
@@ -247,7 +244,6 @@
 
     function fullScreenConfetti() {
       const end = Date.now() + 1600;
-
       (function frame() {
         confettiInstance({
           particleCount: 12,
@@ -256,7 +252,6 @@
           ticks: 180,
           origin: { x: Math.random(), y: Math.random() * 0.3 }
         });
-
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
     }
@@ -271,11 +266,8 @@
       const z = zone.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
 
-      let newLeft = Math.random() * (z.width - b.width);
-      let newTop  = Math.random() * (z.height - b.height);
-
-      noBtn.style.left = newLeft + "px";
-      noBtn.style.top = newTop + "px";
+      noBtn.style.left = Math.random() * (z.width - b.width) + "px";
+      noBtn.style.top = Math.random() * (z.height - b.height) + "px";
 
       growYes();
     }
@@ -286,14 +278,12 @@
         (b.left + b.width / 2) - e.clientX,
         (b.top + b.height / 2) - e.clientY
       );
-
       if (d < 180) moveNo();
     });
 
     noBtn.addEventListener("click", e => e.preventDefault());
 
     yesBtn.addEventListener("click", () => {
-      // MUSIC FADE-IN
       const music = document.getElementById("bgMusic");
       music.volume = 0;
       music.play();
@@ -305,14 +295,11 @@
         if (vol >= 1) clearInterval(fade);
       }, 100);
 
-      // SHOW RESULT
       zone.style.display = "none";
       hint.style.display = "none";
       result.style.display = "block";
 
-      setTimeout(() => {
-        result.classList.add("show");
-      }, 50);
+      setTimeout(() => result.classList.add("show"), 50);
 
       resizeConfettiCanvas();
       fullScreenConfetti();
