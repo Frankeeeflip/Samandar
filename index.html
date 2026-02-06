@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Sameen, will you be my Valentine?</title>
+  <title>Will you be my Valentine?</title>
 
   <!-- Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -91,7 +91,10 @@
       background: var(--yes);
       color: #fff;
     }
-    #yesBtn:hover { background: var(--yesHover); }
+
+    #yesBtn:hover {
+      background: var(--yesHover);
+    }
 
     #noBtn {
       left: 62%;
@@ -131,8 +134,8 @@
 
 <body>
   <!-- BACKGROUND MUSIC -->
-  <audio id="bgMusic" loop>
-    <source src="where-is-my-husband.mp3" type="audio/mpeg">
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="song.mp3" type="audio/mpeg">
   </audio>
 
   <canvas id="confettiCanvas"></canvas>
@@ -176,7 +179,7 @@
             fill="#ff7aa2"/>
     </svg>
 
-    <!-- UPDATED TEXT -->
+    <!-- UPDATED NAME -->
     <h1>Sameen, will you be my Valentine?</h1>
 
     <section class="button-zone" id="zone">
@@ -210,8 +213,6 @@
       const dpr = Math.max(1, window.devicePixelRatio || 1);
       confettiCanvas.width = Math.floor(window.innerWidth * dpr);
       confettiCanvas.height = Math.floor(window.innerHeight * dpr);
-      confettiCanvas.style.width = "100vw";
-      confettiCanvas.style.height = "100vh";
     }
 
     resizeConfettiCanvas();
@@ -233,6 +234,7 @@
           ticks: 180,
           origin: { x: Math.random(), y: Math.random() * 0.3 }
         });
+
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
     }
@@ -244,31 +246,16 @@
       yesBtn.style.transform = `translateY(-50%) scale(${yesScale})`;
     }
 
-    /* ---------- NO BUTTON RUNS AWAY (FASTER) ---------- */
-    function clamp(n, min, max) {
-      return Math.max(min, Math.min(max, n));
-    }
-
-    function moveNo(px, py) {
+    /* ---------- NO BUTTON TELEPORTS ---------- */
+    function moveNo() {
       const z = zone.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
 
-      let dx = (b.left + b.width / 2) - px;
-      let dy = (b.top + b.height / 2) - py;
-      let mag = Math.hypot(dx, dy) || 1;
-      dx /= mag;
-      dy /= mag;
-
-      /* BIGGER JUMP DISTANCE */
-      let newLeft = (b.left - z.left) + dx * 250;
-      let newTop  = (b.top - z.top) + dy * 250;
-
-      newLeft = clamp(newLeft, 0, z.width - b.width);
-      newTop  = clamp(newTop, 0, z.height - b.height);
+      let newLeft = Math.random() * (z.width - b.width);
+      let newTop  = Math.random() * (z.height - b.height);
 
       noBtn.style.left = newLeft + "px";
       noBtn.style.top = newTop + "px";
-      noBtn.style.transform = "none";
 
       growYes();
     }
@@ -280,15 +267,14 @@
         (b.top + b.height / 2) - e.clientY
       );
 
-      /* BIGGER DETECTION RADIUS */
-      if (d < 250) moveNo(e.clientX, e.clientY);
+      if (d < 180) moveNo();
     });
 
     noBtn.addEventListener("click", e => e.preventDefault());
 
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
-      // PLAY MUSIC (AUTOPLAY SAFE)
+      // START MUSIC SAFELY
       document.getElementById("bgMusic").play();
 
       zone.style.display = "none";
@@ -301,4 +287,3 @@
   </script>
 </body>
 </html>
-
