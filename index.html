@@ -130,6 +130,11 @@
 </head>
 
 <body>
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="where-is-my-husband.mp3" type="audio/mpeg">
+  </audio>
+
   <canvas id="confettiCanvas"></canvas>
 
   <main class="card">
@@ -171,7 +176,8 @@
             fill="#ff7aa2"/>
     </svg>
 
-    <h1>Daniela will you be my valentine?</h1>
+    <!-- UPDATED TEXT -->
+    <h1>Sameen, will you be my Valentine?</h1>
 
     <section class="button-zone" id="zone">
       <button id="yesBtn">Yes</button>
@@ -291,13 +297,16 @@
 
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
+      // START MUSIC ON CLICK (AUTOPLAY SAFE)
+      document.getElementById("bgMusic").play();
+
       zone.style.display = "none";
-      hint.style.display = "none";     // HIDE THE HINT
+      hint.style.display = "none";
       result.style.display = "block";
+
       resizeConfettiCanvas();
       fullScreenConfetti();
     });
   </script>
 </body>
 </html>
-
